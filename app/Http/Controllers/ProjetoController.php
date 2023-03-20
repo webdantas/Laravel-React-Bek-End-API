@@ -12,6 +12,45 @@ class ProjetoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     /**
+     * @OA\Get(
+     *     tags={"/projetos"},
+     *     summary="Get a list of projetos",
+     *     description="Get a list of projetos",
+     *     path="/api/projetos",
+     *     @OA\Parameter(
+     *          name="Limit",
+     *          in="query",
+     *          description="Limit per page",
+     *          @OA\Schema(type="init"),
+     *          style="form"
+     *      ),
+     *      @OA\Response(
+*               response="200", description="List of projetos"
+     *      )
+     * )
+     */
+
+     /**
+      * @OA\Server(url= "http://localhost:8000/api/documentation"),
+      */
+
+     /**
+     * @OA\Info(
+     *      version="1.0.0",
+     *      title="API Documentation",
+     *      description="Description of Projetos API",
+     *      @OA\Contact(
+     *          email="webdantas@gmail.com",
+     *          name="Eduardo Dantas Correia"
+     *      ),
+     *      @OA\License(
+     *          name="MIT",
+     *          url="https://opensource.org/licenses/MIT"
+     *      )
+     * )
+     */
     public function index()
     {
         $projetos = AppModelsProjeto::all();
@@ -36,28 +75,46 @@ class ProjetoController extends Controller
      * @param  \App\Models\AppModelsProjeto  $appModelsProjeto
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * Retrieve a project by ID.
+     *
+     * @OA\Get(
+     *     tags={"/projetos"},
+     *     path="/api/projetos/{id}",
+     *     summary="Retrieve a project by ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="Project ID",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Project not found"
+     *     )
+     * )
+     */
     public function show(AppModelsProjeto $appModelsProjeto, $id_projeto)
     {
 
         // Busca o projeto pelo id
         $projeto = $appModelsProjeto->find($id_projeto);
-        DD($projeto);
 
         // Verifica se o projeto foi encontrado
         if (!$projeto) {
             return response()->json(['message' => 'Projeto não encontrado'], 404);
+        }else{
+            // Retorna o arquivo na resposta da API
+            return response()->json($projeto);
         }
-
-        // Define o caminho para o arquivo unitário
-        $caminhoArquivo = public_path('arquivos_unitarios/' . $projeto->id_projeto . '.pdf');
-
-        // Verifica se o arquivo existe
-        if (!file_exists($caminhoArquivo)) {
-            return response()->json(['message' => 'Arquivo não encontrado'], 404);
-        }
-
-        // Retorna o arquivo na resposta da API
-        return response()->file($caminhoArquivo);
     }
 
 

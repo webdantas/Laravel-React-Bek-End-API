@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+
+        $router = $this->app->make(Router::class);
+        $router->pushMiddlewareToGroup('api', \L5Swagger\Http\Middleware\SetApiDefaults::class);
     }
 
     /**

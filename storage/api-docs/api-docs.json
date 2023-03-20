@@ -1,0 +1,47 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "description": "Description of Projetos API",
+        "contact": {
+            "name": "Eduardo Dantas Correia",
+            "email": "webdantas@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/projetos/{id}": {
+            "get": {
+                "tags": [
+                    "/projetos"
+                ],
+                "summary": "Retrieve a project by ID",
+                "description": "Retrieve a project by ID.",
+                "operationId": "acfba0f375881d8905f24fbcd6a04c6b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Project not found"
+                    }
+                }
+            }
+        }
+    }
+}
