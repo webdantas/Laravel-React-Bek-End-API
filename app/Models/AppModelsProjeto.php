@@ -11,5 +11,5 @@ class AppModelsProjeto extends Model
 
     protected $table = 'tb_projeto_rouanet_teste';
 
-    // protected $fillable = 'id_projeto';
+    // protected $fillable = 'id', ;
 }

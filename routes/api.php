@@ -16,12 +16,29 @@ use App\Http\Controllers\ProjetoController;
 |
 */
 
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="API Documentation",
+ *      description="Description of Projetos API",
+ *      @OA\Contact(
+ *          email="webdantas@gmail.com",
+ *          name="Eduardo Dantas Correia"
+ *      ),
+ *      @OA\License(
+ *          name="MIT",
+ *          url="https://opensource.org/licenses/MIT"
+ *      )
+ * )
+ */
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::get('/projetos', [ProjetoController::class, 'index']);
-Route::get('/projetos/{id_projeto}', [ProjetoController::class, 'show']);
+Route::get('/projetos/{id}', [ProjetoController::class, 'show']);
 Route::post('/projetos', [ProjetoController::class, 'store']);
-Route::put('/projetos/{id_projeto}', [ProjetoController::class, 'update']);
-Route::delete('/projetos/{id_projeto}', [ProjetoController::class, 'destroy']);
+Route::put('/projetos/{id}', [ProjetoController::class, 'update']);
+Route::delete('/projetos/{id}', [ProjetoController::class, 'destroy']);
